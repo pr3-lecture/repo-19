@@ -1,17 +1,18 @@
+Aufgabe 2a
 
-CAR einer Liste repräsentiert die Elternknoten, während cdr die Kinder repräsentiert.
-Jeder untergeordnete Teilaum ist eine Liste. 
+CAR einer Liste repräsentiert den Elternknoten, während CDR die Kinder repräsentiert.
+Jeder untergeordnete Teilaum ist eine Liste.
 
-e.g.:
+Beispiel:
 
 Folgender Baum:
 
-a
-| \
-b  c
-|\
-d e
+        a
+       / \
+      b   c
+     / \
+    d   e
 
-Wird so aussehen.
+Wird als Liste so aussehen:
 
-(a (b d e) c)
+(a (b((d) (e))) (c))
