@@ -31,22 +31,39 @@
 
 **(c) Länge einer Liste berechnen**
 `````` lisp
-
+(defun my-length(liste)
+    (if (null liste)
+        0
+    (+ 1 (my-length (cdr liste))))
+)
 ``````
 
 **(d) Länge einer geschachtelten Liste berechnen**
 `````` lisp
-
+(defun my-lengthr(liste)
+    (cond ((null liste) 0)
+        ((atom (car liste)) (+ 1 (my-lengthr (cdr liste))))
+        ((not (atom (car liste))) (+ (my-lengthr (car liste)) (my-lengthr (cdr liste))))
+    )
+)
 ``````
 
 **(e) Listen umkehren**
 ``` lisp
-
+(defun my-reverse(liste)
+    (if (null liste) liste
+        (append (my-reverse(cdr liste)) (list (car liste))))
+)
 ```
 
 **(f) Geschachtelte Listen umkehren**
 ``` lisp
-
+(defun my-reverser (liste)
+    (cond ((null liste) liste)
+        ((atom (car liste)) (append  (my-reverser(cdr liste)) (list (car liste))))
+        ((not (atom (car liste))) (append  (my-reverser(cdr liste)) (list (my-reverser (car liste)))))
+    )
+)
 ```
 
 ## Aufgabe 2
