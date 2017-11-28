@@ -1,11 +1,11 @@
 1514966 Fernando Azevedo
 1330738 Florian Hrycaj
 
-#Übungsblatt 1 - PR3 (Prof. Schramm)
+# Übungsblatt 1 - PR3 (Prof. Schramm)
 
-##Aufgabe 1
+## Aufgabe 1
 **(a) Elemente tauschen**
-'''lisp
+''' lisp
 ;;; Aufgabe 1a
 (defun rotiere (liste)
     (if (or (null liste) (null (cdr liste)))
@@ -20,7 +20,7 @@
 '''
 
 **(b) Element einfügen**
-'''lisp
+''' lisp
 (defun neues-vorletztes (ele liste)
     (if (or (null liste) (null (cdr liste)))
         (liste)
@@ -29,31 +29,31 @@
 '''
 
 **(c) Länge einer Liste berechnen**
-'''lisp
+''' lisp
 
 '''
 
 **(d) Länge einer geschachtelten Liste berechnen**
-'''lisp
+''' lisp
 
 '''
 
 **(e) Listen umkehren**
-'''lisp
+''' lisp
 
 '''
 
 **(f) Geschachtelte Listen umkehren**
-'''lisp
+''' lisp
 
 '''
 
-##Aufgabe 2
+## Aufgabe 2
 **(a) Darstellung eines Binärbaums**
 
 
 **(b) Baumtraversierung**
-'''lisp
+''' lisp
 
 '''
 
