@@ -7,7 +7,6 @@
 ## Aufgabe 1
 **(a) Elemente tauschen**
 ``` lisp
-;;; Aufgabe 1a
 (defun rotiere (liste)
     (if (or (null liste) (null (cdr liste)))
         (liste)
