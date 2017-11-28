@@ -1,11 +1,12 @@
 1514966 Fernando Azevedo
+
 1330738 Florian Hrycaj
 
 # Übungsblatt 1 - PR3 (Prof. Schramm)
 
 ## Aufgabe 1
 **(a) Elemente tauschen**
-''' lisp
+``` lisp
 ;;; Aufgabe 1a
 (defun rotiere (liste)
     (if (or (null liste) (null (cdr liste)))
@@ -17,48 +18,48 @@
 (defun rotiere_alternative (liste)
     (append (rest liste) (list (first liste)))
 )
-'''
+```
 
 **(b) Element einfügen**
-''' lisp
+`````` lisp
 (defun neues-vorletztes (ele liste)
     (if (or (null liste) (null (cdr liste)))
         (liste)
     (reverse (cons (car (reverse liste)) (cons ele (cdr (reverse liste))))))
 )
-'''
+``````
 
 **(c) Länge einer Liste berechnen**
-''' lisp
+`````` lisp
 
-'''
+``````
 
 **(d) Länge einer geschachtelten Liste berechnen**
-''' lisp
+`````` lisp
 
-'''
+``````
 
 **(e) Listen umkehren**
-''' lisp
+``` lisp
 
-'''
+```
 
 **(f) Geschachtelte Listen umkehren**
-''' lisp
+``` lisp
 
-'''
+```
 
 ## Aufgabe 2
 **(a) Darstellung eines Binärbaums**
 
 
 **(b) Baumtraversierung**
-''' lisp
+``` lisp
 
-'''
+```
 
 ##Tests
-'''
+```
 (defvar list1 '(eins zwei drei vier))
 (defvar list2 '(eins zwei (zwei (zwei drei) eins) drei vier))
 (defvar item1 'dreieinhalb)
@@ -88,4 +89,4 @@
 (print "Aufgabe 1f")
 (defvar ret1f (my-reverser list2))
 (print ret1f)
-'''
+```
