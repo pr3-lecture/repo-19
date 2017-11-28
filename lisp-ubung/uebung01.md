@@ -82,7 +82,7 @@ Folgender Baum:
 
 Wird als Liste so aussehen:
 
-(a (b((d) (e))) (c))
+(a (b d e) c)
 
 **(b) Baumtraversierung**
 ``` lisp
