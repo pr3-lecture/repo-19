@@ -1,3 +1,12 @@
+1514966 Fernando Azevedo
+
+1330738 Florian Hrycaj
+
+# Übungsblatt 2 - PR3 (Prof. Schramm)
+
+## Aufgabe 1
+**insert**
+``` lisp
 ; Knoten in baum einfügen
 (defun insert(tree node)
   (cond ((or (null node)(contains tree node)) nil)
@@ -14,9 +23,10 @@
         ; läuft durch den baum
         ((> (car tree) node) (list (car tree) (insertHelp (cadr tree) node)(caddr tree)))
         ((< (car tree) node) (list (car tree)(cadr tree)(insertHelp (caddr tree) node)))))
+```
 
-
-
+**insertTreeFromFile**
+``` lisp
 ; Fügt Werte aus einer Datei ein
 (defun insertTreeFromFile(tree filename)
     (addAll tree (getFile filename)))
@@ -29,9 +39,10 @@
     (loop for line = (read stream nil 'eof)
         until(eql line 'eof)
         collect line)))
+```
 
-
-
+**contains**
+``` lisp
 ; Prüft auf Gleichheit; nil heißt nein; T heißt ja
 (defun contains(tree node)
   (cond ((or (isEmpty tree)(null node)) nil)
@@ -44,39 +55,45 @@
   (cond ((= (car tree) node) (funcall fn (car tree) node))
         ((> (car tree) node) (funcall fn (cadr tree) node))
         ((< (car tree) node) (funcall fn (caddr tree) node))))
+```
 
-
-
+**size**
+``` lisp
 ; Gibt Anzahl der Knoten zurück
 (defun size(tree)
   (cond ((null tree) 0)
         ((atom (car tree)) (+ 1 (my-lengthr (cdr tree))))
         ((not (atom (car tree))) (+ (my-lengthr (car tree)) (my-lengthr (cdr tree))))))
 
+; Hilfsfunktion für size
 (defun my-lengthr(l)
   (cond ((null l) 0)
         ((atom (car l)) (+ 1 (my-lengthr (cdr l))))
         ((not (atom (car l))) (+ (my-lengthr (car l)) (my-lengthr (cdr l))))))
+```
 
-
-
+**getMax**
+``` lisp
 ; Gibt maximalen Wert zurück
 (defun getMax(tree)
   (cond ((isEmpty tree) nil)
         ((atom tree) tree)
         ((null (caddr tree)) (car tree))
         ((not(null (caddr tree)))(getMax (caddr tree)))))
+```
 
-
-
+**getMin**
+``` lisp
 ; Gibt minimalen Wert zurück
 (defun getMin(tree)
   (cond ((isEmpty tree) nil)
         ((atom tree) tree)
         ((null (cadr tree)) (car tree))
         ((not(null (cadr tree)))(getMin (cadr tree)))))
+```
 
-
+**remove**
+``` lisp
 ; Löscht Wert aus Baum
 (defun myremove(tree node)
   (cond ((not(contains tree node)) nil)
@@ -94,21 +111,24 @@
         ((= (car tree) node) (list (caddr tree)))
         ((> (car tree) node) (list (car tree)(hilfsRemove(cadr tree) node)(caddr tree)))
         ((< (car tree) node) (list (car tree)(cadr tree)(hilfsRemove(caddr tree) node)))))
+```
 
-
-
+**isEmpty**
+``` lisp
 ; Schaut ob Baum leer ist
 (defun isEmpty(tree) (null tree))
+```
 
-
-
+**addAll**
+``` lisp
 ; Fügt Elemente des übergebenen Baums in den Vorhandenen ein
 (defun addAll(tree otherTree)
   (if (car otherTree)
     (addAll (insert tree (car otherTree)) (cdr otherTree)) tree))
+```
 
-
-
+**height**
+``` lisp
 ; Gibt die Höhe des Baums zurück
 (defun height(tree)
   (check-type tree list)
@@ -119,12 +139,13 @@
 
 ; Hilfsfunktion für height
 (defun height-helper(tree)
-  (if (atom tree)
-    1 ; tree without leafs has height of 1
-    (1+ (height tree))))
+(if (atom tree)
+  1 ; tree without leafs has height of 1
+  (1+ (height tree))))
+```
 
-
-
+**printLevelOrder**
+``` lisp
 ; Gibt den Baum in Levelorder aus
 (defun printLevelOrder(tree)
     (loop while (not (null tree))
@@ -134,120 +155,4 @@
           (print (car node))
         )
         (setq tree (append tree (cdr node)))))
-
-
-; TESTS
-(defvar file "./data.txt")
-(defvar tree1 '(42 (30 (12 () (17)) (36)) (75 (56) ())))
-(defvar tree2 '(7 3 (8 (2) (40))))
-(defvar tree3 '(60 2 88))
-(defvar tree4 '(42 (30 (12 () (17)) (36)) (75 (56) ())))
-(defvar emptytree '())
-(defvar val1 52)
-(defvar val2 59)
-(defvar val3 77)
-(defvar val4 81)
-(defvar val5 119)
-(defvar val6 4)
-(defvar val7 39)
-(defvar val8 35)
-(defvar existingVal 56)
-(defvar existingVal2 30)
-(defvar nonExistingVal 120)
-
-(print "-----------------------------------------")
-(print "Uebungsblatt 2, Aufgabe 1 - BinaryTree" )
-(print "-----------------------------------------")
-(print "INSERT TREE")
-(print "Ausgangsbaum:")
-(print tree1)
-(print "Insert value:")
-(print val5)
-(defvar ret1 (insert tree1 val5))
-(print "Baum danach:")
-(print ret1)
-(print "Insert another value:")
-(print val6)
-(defvar ret2 (insert ret1 val6))
-(print ret2)
-(print "-----------------------------------------")
-(print "INSERT TREE FROM FILE")
-(print "Ausgangsbaum:")
-(print tree1)
-(print "Daten in Datei data.txt: 2 14 9 111 99 4001 999")
-(print "Baum danach:")
-(print (insertTreeFromFile tree1 file))
-(print "-----------------------------------------")
-(print "CONTAINS")
-(print "Ausgangsbaum:")
-(print tree1)
-(print "Pruefe existierenden Wert:")
-(print existingVal)
-(print "Wert vorhanden?")
-(print (contains tree1 existingVal))
-(print "Pruefe nicht existierenden Wert:")
-(print nonExistingVal)
-(print "Wert vorhanden?")
-(print (contains tree1 nonExistingVal))
-(print "-----------------------------------------")
-(print "SIZE")
-(print "Ausgangsbaum:")
-(print tree2)
-(print "Baumgroesse")
-(print (size tree2))
-(print "-----------------------------------------")
-(print "HEIGHT")
-(print "Ausgangsbaum:")
-(print tree1)
-(print "Baumhoehe")
-(print (height tree1))
-(print "-----------------------------------------")
-(print "GET MAX")
-(print "Ausgangsbaum:")
-(print tree1)
-(print "Maximum:")
-(print (getMax tree1))
-(print "-----------------------------------------")
-(print "GET MIN")
-(print "Ausgangsbaum:")
-(print tree1)
-(print "Minimum:")
-(print (getMin tree1))
-(print "-----------------------------------------")
-(print "REMOVE")
-(print "Ausgangsbaum:")
-(print tree1)
-(print "Remove value:")
-(print existingVal)
-(defvar ret3 (myremove tree1 existingVal))
-(print "Baum danach:")
-(print ret3)
-;(print "Remove another value:")
-;(print existingVal2)
-;(defvar ret4 (insert ret3 existingVal2))
-;(print "Baum danach:")
-;(print ret4)
-(print "-----------------------------------------")
-(print "IS EMPTY")
-(print "Gefuellter Ausgangsbaum:")
-(print tree1)
-(print "Baum leer?:")
-(print (isEmpty tree1))
-(print "Leerer Ausgangsbaum:")
-(print emptytree)
-(print "Baum leer?:")
-(print (isEmpty emptytree))
-(print "-----------------------------------------")
-(print "ADD ALL")
-(print "Ausgangsbaeume:")
-(print tree1)
-(print tree3)
-(print "Baum danach:")
-(print (addAll tree1 tree3))
-(print "-----------------------------------------")
-(print "PRINT LEVEL ORDER")
-(print "Ausgangsbaum:")
-(print tree1)
-(print "Baum in Level-Order:")
-(printLevelOrder (list tree1))
-(print "-----------------------------------------")
+```
